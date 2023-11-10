@@ -1,5 +1,5 @@
 function applyAgeRestrictions(customerAge, productType) {
-    if (customerAge <= 21) {
+    if (customerAge < 21) {
         return false;
     }
 
@@ -11,7 +11,6 @@ function applyAgeRestrictions(customerAge, productType) {
 }
 
 function applyProductPriceRules(basePrice, productType, hasReturns, isLoyaltyMember) {
-
     if (productType === "D") {
         basePrice *= 1.20;
     }
@@ -21,14 +20,14 @@ function applyProductPriceRules(basePrice, productType, hasReturns, isLoyaltyMem
     }
 
     if (isLoyaltyMember) {
-        basePrice *= 0.10;
+        basePrice *= 0.90;
     }
 
     return basePrice;
 }
 
-function generateProductPrice(customerAge) {
-    return customerAge + 15;
+function generateProductPrice() {
+    return 15;
 }
 
 function calculateProductPrice(customerAge, productType, hasReturns, isLoyaltyMember) {
@@ -37,7 +36,7 @@ function calculateProductPrice(customerAge, productType, hasReturns, isLoyaltyMe
     if (!applyAgeRestrictions(customerAge, productType)) {
         return "Customer does not meet the purchase requirements.";
     }
-    let basePrice = generateProductPrice(customerAge);
+    let basePrice = generateProductPrice();
     console.log(basePrice);
 
     basePrice = applyProductPriceRules(basePrice, productType, hasReturns, isLoyaltyMember);
@@ -49,4 +48,5 @@ function calculateProductPrice(customerAge, productType, hasReturns, isLoyaltyMe
     return basePrice;
 }
 
+exports.applyAgeRestrictions = applyAgeRestrictions;
 exports.calculateProductPrice = calculateProductPrice;
